@@ -1,0 +1,41 @@
+```
+└── 📁OS
+    └── 📁.vscode
+        ├── c_cpp_properties.json
+        ├── launch.json
+        ├── settings.json
+    └── 📁Core
+        └── 📁src
+            └── 📁initramfs
+                └── 📁bin
+                    ├── .gitkeep
+                └── 📁dev
+                    ├── .gitkeep
+                └── 📁etc
+                    ├── .gitkeep
+                └── 📁proc
+                    └── 📁bin
+                    └── 📁dev
+                    └── 📁etc
+                    └── 📁proc
+                    └── 📁sbin
+                    └── 📁sys
+                    ├── .gitkeep
+                └── 📁sbin
+                    ├── .gitkeep
+                └── 📁sys
+                    ├── .gitkeep
+                ├── init
+                ├── initramfs_init.c
+                ├── initramfs_test_init.c
+            └── 📁rootfs
+                ├── .gitkeep
+                ├── rootfs_init.c
+                ├── rootfs_test_init.c
+            ├── .gitkeep
+            ├── initramfs.cpio.gz
+        ├── .gitkeep
+    ├── .gitattributes
+    ├── .gitignore
+    └── Structure.md
+```
