@@ -1,34 +1,34 @@
 ```
-└── 📁OS
-    └── 📁.vscode
+└── OS
+    └── .vscode
         ├── c_cpp_properties.json
         ├── launch.json
         ├── settings.json
-    └── 📁Core
-        └── 📁src
-            └── 📁initramfs
-                └── 📁bin
+    └── Core
+        └── src
+            └── initramfs
+                └── bin
                     ├── .gitkeep
-                └── 📁dev
+                └── dev
                     ├── .gitkeep
-                └── 📁etc
+                └── etc
                     ├── .gitkeep
-                └── 📁proc
-                    └── 📁bin
-                    └── 📁dev
-                    └── 📁etc
-                    └── 📁proc
-                    └── 📁sbin
-                    └── 📁sys
+                └── proc
+                    └── bin
+                    └── dev
+                    └── etc
+                    └── proc
+                    └── sbin
+                    └── sys
                     ├── .gitkeep
-                └── 📁sbin
+                └── sbin
                     ├── .gitkeep
-                └── 📁sys
+                └── sys
                     ├── .gitkeep
                 ├── init
                 ├── initramfs_init.c
                 ├── initramfs_test_init.c
-            └── 📁rootfs
+            └── rootfs
                 ├── .gitkeep
                 ├── rootfs_init.c
                 ├── rootfs_test_init.c
