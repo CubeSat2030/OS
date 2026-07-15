@@ -6,18 +6,28 @@
         ├── settings.json
     └── 📁Core
         └── 📁src
+            └── 📁modules
+                ├── cubesat_sensor.c
+                ├── cubesat_wdt.c
+                ├── Makefile
             └── 📁rootfs
                 └── 📁bin
+                └── 📁core
                 └── 📁dev
                 └── 📁etc
                 └── 📁proc
                 └── 📁sbin
                 └── 📁sys
-                ├── init
-                ├── init.c
+                ├── init_os.c
+                ├── InterprativeLogicLayer.c
+                ├── InterprativeLogicLayer.h
+                ├── main.c
+                ├── version
             ├── .gitkeep
         ├── .gitkeep
     ├── .gitattributes
     ├── .gitignore
-    └── Structure.md
+    ├── Makefile
+    ├── Structure.md
+    └── version
 ```
