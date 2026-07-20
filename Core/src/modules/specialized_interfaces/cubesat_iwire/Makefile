@@ -1,0 +1,1 @@
+obj-m := iwire_status.o

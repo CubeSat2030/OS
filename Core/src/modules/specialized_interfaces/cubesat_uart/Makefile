@@ -1,0 +1,1 @@
+obj-m := uart_status.o

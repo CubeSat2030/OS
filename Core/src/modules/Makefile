@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0
-obj-m := cubesat_sensor.o cubesat_wdt.o
+obj-m := cubesat_watchdog/ \
+         specialized_interfaces/cubesat_i2c/ \
+         specialized_interfaces/cubesat_iwire/ \
+         specialized_interfaces/cubesat_spi/ \
+         specialized_interfaces/cubesat_uart/
 
 KERNELDIR ?= /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
