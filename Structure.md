@@ -1,33 +1,46 @@
 ```
-└── 📁OS
-    └── 📁.vscode
+└── OS
+    └── .vscode
         ├── c_cpp_properties.json
         ├── launch.json
         ├── settings.json
-    └── 📁Core
-        └── 📁src
-            └── 📁modules
-                ├── cubesat_sensor.c
-                ├── cubesat_wdt.c
+    └── Core
+        └── src
+            └── modules
+                └── cubesat_watchdog
+                    ├── cubesat_wdt.c
+                └── specialized_interfaces
+                    └── cubesat_i2c
+                        ├── i2c_status.c
+                    └── cubesat_iwire
+                        ├── iwire_status.c
+                    └── cubesat_spi
+                        ├── spi_status.c
+                    └── cubesat_uart
+                        ├── uart_status.c
+                    ├── .gitkeep
                 ├── Makefile
-            └── 📁rootfs
-                └── 📁bin
-                └── 📁core
-                └── 📁dev
-                └── 📁etc
-                └── 📁proc
-                └── 📁sbin
-                └── 📁sys
+            └── rootfs
+                └── bin
+                └── core
+                    ├── cubesat_sensor.ko
+                    ├── cubesat_wdt.ko
+                └── dev
+                └── etc
+                └── proc
+                └── sbin
+                └── sys
+                ├── init
                 ├── init_os.c
                 ├── InterprativeLogicLayer.c
                 ├── InterprativeLogicLayer.h
+                ├── main
                 ├── main.c
                 ├── version
             ├── .gitkeep
         ├── .gitkeep
     ├── .gitattributes
     ├── .gitignore
-    ├── Makefile
     ├── Structure.md
     └── version
 ```
