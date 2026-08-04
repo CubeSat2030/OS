@@ -6,17 +6,36 @@
         ├── settings.json
     └── Core
         └── src
+            └── bootfs
+                ├── .gitkeep
             └── modules
                 └── cubesat_watchdog
+                    ├── .cubesat_wdt.mod.cmd
+                    ├── .cubesat_wdt.o.cmd
+                    ├── .modules.order.cmd
                     ├── cubesat_wdt.c
+                    ├── cubesat_wdt.mod
+                    ├── cubesat_wdt.o
+                    ├── Makefile
+                    ├── modules.order
                 └── specialized_interfaces
                     └── cubesat_i2c
+                        ├── .ads1115_driver.o.d
+                        ├── .ads1115.mod.cmd
+                        ├── .i2c_status.o.cmd
+                        ├── ads1115_driver.c
+                        ├── ads1115.mod
                         ├── i2c_status.c
+                        ├── i2c_status.o
+                        ├── Makefile
                     └── cubesat_iwire
                         ├── iwire_status.c
+                        ├── Makefile
                     └── cubesat_spi
+                        ├── Makefile
                         ├── spi_status.c
                     └── cubesat_uart
+                        ├── Makefile
                         ├── uart_status.c
                     ├── .gitkeep
                 ├── Makefile
