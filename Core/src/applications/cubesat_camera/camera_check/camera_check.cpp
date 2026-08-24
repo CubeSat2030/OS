@@ -35,13 +35,12 @@ bool camera_has_streaming(CameraContext &ctx) {
 int camera_check_link(CameraContext &ctx) {
     if (ctx.fd < 0) return -ENODEV;
 
-    // Enumerate the first video input and check its status
     v4l2_input input;
     memset(&input, 0, sizeof(input));
     input.index = 0;
 
     if (ioctl(ctx.fd, VIDIOC_ENUMINPUT, &input) < 0) {
-        return -errno;
+        return -errno;   // often -ENOTTY for Pi camera
     }
 
     if (input.status & V4L2_IN_ST_NO_SIGNAL) {

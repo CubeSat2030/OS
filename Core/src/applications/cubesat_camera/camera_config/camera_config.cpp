@@ -39,7 +39,7 @@ int camera_set_exposure(CameraContext &ctx, int exposure_us) {
 int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
     if (ctx.fd < 0) return -ENODEV;
 
-    // If already streaming, stop and clean up old buffers
+    // Stop streaming and cleanup if already active
     if (ctx.streaming) {
         enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
         ioctl(ctx.fd, VIDIOC_STREAMOFF, &type);
@@ -52,7 +52,7 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
     }
     ctx.buffers.clear();
 
-    // 1. Set image format
+    // 1. Set format
     v4l2_format fmt;
     memset(&fmt, 0, sizeof(fmt));
     fmt.type                = V4L2_BUF_TYPE_VIDEO_CAPTURE;
@@ -72,7 +72,7 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
         return ret;
     }
 
-    // 3. Request memory‑mapped buffers
+    // 3. Request memory-mapped buffers
     v4l2_requestbuffers req;
     memset(&req, 0, sizeof(req));
     req.count  = cfg.num_buffers;
@@ -87,7 +87,7 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
     }
     ctx.reqbuf = req;
 
-    // 4. Map buffers into user space
+    // 4. Map buffers
     ctx.buffers.resize(req.count);
     for (unsigned int i = 0; i < req.count; i++) {
         v4l2_buffer buf;
@@ -104,9 +104,10 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
             return -errno;
         }
 
-        void *ptr = mmap(nullptr, buf.length, PROT_READ | PROT_WRITE,
-                         MAP_SHARED, ctx.fd, buf.m.offset);
-        if (ptr == MAP_FAILED) {
+        ctx.buffers[i].start = mmap(nullptr, buf.length,
+                                    PROT_READ | PROT_WRITE, MAP_SHARED,
+                                    ctx.fd, buf.m.offset);
+        if (ctx.buffers[i].start == MAP_FAILED) {
             int err = errno;
             for (unsigned int j = 0; j < i; j++) {
                 munmap(ctx.buffers[j].start, ctx.buffers[j].length);
@@ -114,12 +115,10 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
             ctx.buffers.clear();
             return -err;
         }
-
-        ctx.buffers[i].start  = ptr;
         ctx.buffers[i].length = buf.length;
     }
 
-    // 5. Queue all buffers
+    // 5. Queue all buffers (but do not start streaming)
     for (unsigned int i = 0; i < ctx.buffers.size(); i++) {
         v4l2_buffer buf;
         memset(&buf, 0, sizeof(buf));
@@ -136,17 +135,8 @@ int camera_configure(CameraContext &ctx, const CameraConfig &cfg) {
         }
     }
 
-    // 6. Start streaming
-    enum v4l2_buf_type type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
-    if (ioctl(ctx.fd, VIDIOC_STREAMON, &type) < 0) {
-        for (auto &b : ctx.buffers) {
-            munmap(b.start, b.length);
-        }
-        ctx.buffers.clear();
-        return -errno;
-    }
-
-    ctx.streaming = true;
+    // Streaming is not started here; it will be started/stopped by capture_still()
+    ctx.streaming = false;
     return 0;
 }
 

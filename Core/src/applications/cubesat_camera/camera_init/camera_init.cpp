@@ -16,7 +16,7 @@ int camera_init(CameraContext &ctx, const std::string &device) {
 
     ctx.device = device;
 
-    // Open device (non-blocking so we can use poll() later)
+    // Open device (non-blocking for poll)
     ctx.fd = open(device.c_str(), O_RDWR | O_NONBLOCK);
     if (ctx.fd < 0) {
         return -errno;
