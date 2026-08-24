@@ -1,1 +1,3 @@
-obj-m := cubesat_wdt.o
+# SPDX-License-Identifier: GPL-2.0
+
+obj-m += cubesat_wdt.o
