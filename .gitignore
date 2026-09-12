@@ -10,6 +10,11 @@
 #
 # Normal rules (sorted alphabetically)
 #
+
+Core/src/PlatformSoftware/init
+Core/src/PlatformSoftware/main
+init
+main
 .*
 *.a
 *.asn1.[ch]
